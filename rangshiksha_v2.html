@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>RangShiksha – 30 Days English Learning</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--sun:#FFB703;--sky:#219EBC;--leaf:#52B788;--coral:#FB8500;--purple:#9B59B6;--pink:#E91E8C;--dark:#1A1A2E;--cream:#FFFBF0;--soft:#F4F4F4;--r:18px}
+body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--dark);min-height:100vh}
+
+/* NAV */
+nav{background:white;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 12px rgba(0,0,0,0.08);position:sticky;top:0;z-index:100}
+.logo{font-family:'Baloo 2',cursive;font-size:1.5rem;font-weight:800;color:var(--sky)}.logo span{color:var(--coral)}
+.day-badge{background:var(--sun);color:var(--dark);font-weight:800;font-size:0.82rem;padding:6px 14px;border-radius:50px}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#E3F4FD,#FFF8E7);padding:40px 20px 32px;text-align:center}
+.hero h1{font-family:'Baloo 2',cursive;font-size:clamp(1.7rem,5vw,2.8rem);font-weight:800;margin-bottom:10px}
+.hero h1 em{font-style:normal;color:var(--sky)}
+.hero p{color:#555;font-size:0.95rem;max-width:480px;margin:0 auto 20px;line-height:1.7}
+.feature-pills{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:28px}
+.pill{background:white;border-radius:50px;padding:5px 14px;font-weight:700;font-size:0.78rem;box-shadow:0 2px 8px rgba(0,0,0,0.08)}
+
+/* CLASS SELECTOR */
+.class-section{background:white;padding:24px 20px;border-bottom:2px solid #f0f0f0}
+.class-section h3{font-family:'Baloo 2',cursive;font-size:1.1rem;font-weight:800;text-align:center;margin-bottom:14px;color:var(--dark)}
+.class-tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.ctab{padding:9px 18px;border-radius:50px;border:2px solid #ddd;background:white;font-weight:700;font-size:0.85rem;cursor:pointer;transition:all 0.2s;font-family:'Nunito',sans-serif;color:var(--dark)}
+.ctab:hover,.ctab.active{background:var(--sky);color:white;border-color:var(--sky)}
+
+/* MAIN */
+.main{max-width:860px;margin:0 auto;padding:24px 16px}
+
+/* DAY NAV */
+.day-nav{display:flex;align-items:center;justify-content:space-between;background:white;border-radius:var(--r);padding:14px 18px;box-shadow:0 2px 12px rgba(0,0,0,0.07);margin-bottom:16px}
+.dnbtn{background:var(--sky);color:white;border:none;border-radius:50px;padding:9px 18px;font-weight:800;font-size:0.85rem;cursor:pointer;font-family:'Nunito',sans-serif;transition:opacity 0.2s}
+.dnbtn:hover{opacity:0.85}.dnbtn:disabled{background:#ddd;color:#999;cursor:not-allowed}
+.day-info{text-align:center}
+.day-num{font-family:'Baloo 2',cursive;font-size:1.5rem;font-weight:800;color:var(--sky)}
+.day-top{font-size:0.8rem;color:#888;font-weight:600}
+
+/* PROGRESS */
+.prog-wrap{background:#eee;border-radius:50px;height:7px;margin-bottom:24px;overflow:hidden}
+.prog-fill{background:linear-gradient(90deg,var(--sky),var(--leaf));height:100%;border-radius:50px;transition:width 0.4s}
+
+/* CARDS */
+.card{background:white;border-radius:var(--r);padding:22px;margin-bottom:18px;box-shadow:0 3px 14px rgba(0,0,0,0.07)}
+.card-header{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.card-icon{font-size:1.8rem}
+.card-title{font-family:'Baloo 2',cursive;font-size:1.1rem;font-weight:800}
+.card-sub{font-size:0.78rem;color:#999}
+
+/* SPELLING */
+.spell-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:12px}
+.spell-item{background:var(--soft);border-radius:14px;padding:16px;border-left:4px solid var(--sky)}
+.spell-word{font-family:'Baloo 2',cursive;font-size:1.4rem;font-weight:800}.spell-blank{color:var(--sky)}
+.spell-ans{margin-top:8px;display:flex;flex-wrap:wrap;gap:5px}
+.sans{background:white;border:1.5px solid var(--sky);padding:3px 10px;border-radius:50px;font-size:0.78rem;font-weight:700;color:var(--sky)}
+.spell-mean{font-size:0.74rem;color:#888;margin-top:6px;font-style:italic}
+
+/* WORD BUILD */
+.wb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.wb-item{background:var(--soft);border-radius:14px;padding:16px;border-left:4px solid var(--coral)}
+.wb-eq{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.wb-part{background:white;border:1.5px solid var(--coral);padding:4px 10px;border-radius:8px;font-family:'Baloo 2',cursive;font-size:1rem;font-weight:800;color:var(--coral)}
+.wb-plus{color:#bbb;font-weight:800}
+.wb-result{font-family:'Baloo 2',cursive;font-size:1.1rem;font-weight:800;color:var(--coral)}
+.wb-mean{font-size:0.74rem;color:#888;font-style:italic}
+
+/* PRONUNCIATION */
+.pron-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.pron-item{background:var(--soft);border-radius:14px;padding:16px;border-left:4px solid var(--purple)}
+.pron-rule{font-family:'Baloo 2',cursive;font-size:0.95rem;font-weight:800;color:var(--purple);margin-bottom:8px}
+.pron-sound{background:white;padding:6px 12px;border-radius:8px;font-weight:700;font-size:0.85rem;margin-bottom:10px;display:inline-block}
+.pron-ex{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #eee;font-size:0.8rem}
+.pron-w{font-weight:700}.pron-h{color:var(--purple);font-weight:600}
+
+/* VOCABULARY */
+.voc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.voc-item{background:var(--soft);border-radius:14px;padding:16px;text-align:center;border-top:4px solid var(--sun)}
+.voc-word{font-family:'Baloo 2',cursive;font-size:1.2rem;font-weight:800;margin-bottom:4px}
+.voc-mean{font-size:0.8rem;color:var(--leaf);font-weight:700;margin-bottom:6px}
+.voc-use{font-size:0.75rem;color:#777;font-style:italic;line-height:1.5}
+
+/* IDIOMS */
+.idiom-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.idiom-item{background:linear-gradient(135deg,#FFF3E0,#FFE0B2);border-radius:14px;padding:18px;border-left:4px solid var(--coral)}
+.idiom-phrase{font-family:'Baloo 2',cursive;font-size:1rem;font-weight:800;color:var(--dark);margin-bottom:6px}
+.idiom-mean{font-size:0.82rem;color:#555;margin-bottom:8px;font-weight:600}
+.idiom-use{font-size:0.78rem;color:#777;font-style:italic;line-height:1.5;background:white;padding:6px 10px;border-radius:8px}
+
+/* DAILY ACTIVITY */
+.act-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.act-item{background:linear-gradient(135deg,#E8F5E9,#C8E6C9);border-radius:14px;padding:18px;border-left:4px solid var(--leaf)}
+.act-icon{font-size:2rem;margin-bottom:8px}
+.act-name{font-family:'Baloo 2',cursive;font-size:1rem;font-weight:800;color:var(--dark);margin-bottom:6px}
+.act-steps{list-style:none;display:flex;flex-direction:column;gap:4px}
+.act-steps li{font-size:0.8rem;color:#444;padding:3px 0;border-bottom:1px solid rgba(0,0,0,0.06);display:flex;gap:6px}
+.act-steps li::before{content:'→';color:var(--leaf);font-weight:800;flex-shrink:0}
+
+/* QUIZ */
+.quiz-q{font-family:'Baloo 2',cursive;font-size:1.05rem;font-weight:800;margin-bottom:14px}
+.quiz-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.qopt{padding:11px 14px;border-radius:12px;border:2px solid #ddd;background:white;font-weight:700;font-size:0.88rem;cursor:pointer;transition:all 0.2s;text-align:center;font-family:'Nunito',sans-serif}
+.qopt:hover{border-color:var(--sky);background:#E8F4FD}
+.qopt.correct{background:#E8F5E9;border-color:var(--leaf);color:var(--leaf)}
+.qopt.wrong{background:#FFEBEE;border-color:#E57373;color:#E57373}
+.quiz-res{margin-top:12px;padding:10px 14px;border-radius:10px;font-weight:700;font-size:0.85rem;display:none}
+.quiz-res.show{display:block}
+.quiz-res.c{background:#E8F5E9;color:var(--leaf)}
+.quiz-res.w{background:#FFEBEE;color:#E57373}
+
+/* COMPLETE */
+.complete{text-align:center;padding:32px 20px;background:white;border-radius:var(--r);box-shadow:0 3px 14px rgba(0,0,0,0.07)}
+.comp-emoji{font-size:3.5rem;margin-bottom:12px}
+.complete h3{font-family:'Baloo 2',cursive;font-size:1.6rem;font-weight:800;color:var(--sky);margin-bottom:8px}
+.complete p{color:#666;margin-bottom:20px;font-size:0.9rem}
+.next-btn{background:var(--sky);color:white;border:none;padding:12px 28px;border-radius:50px;font-weight:800;font-size:0.95rem;cursor:pointer;font-family:'Nunito',sans-serif;transition:transform 0.2s}
+.next-btn:hover{transform:translateY(-2px)}
+
+footer{background:var(--dark);color:#888;text-align:center;padding:20px;font-size:0.8rem;margin-top:32px}
+footer span{color:var(--coral)}
+
+@media(max-width:560px){
+  .spell-grid,.wb-grid,.pron-grid,.voc-grid,.idiom-grid,.act-grid{grid-template-columns:1fr}
+  .quiz-opts{grid-template-columns:1fr}
+  .main{padding:16px 12px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">🎨 Rang<span>Shiksha</span></div>
+  <div class="day-badge" id="navBadge">Day 1 · LKG</div>
+</nav>
+
+<div class="hero">
+  <h1>30 Days of <em>English Learning</em></h1>
+  <p>Spelling, word building, pronunciation, vocabulary, idioms and daily activities — every day something new, for every class.</p>
+  <div class="feature-pills">
+    <span class="pill">✏️ Spelling</span>
+    <span class="pill">🔤 Word Building</span>
+    <span class="pill">🗣️ Pronunciation</span>
+    <span class="pill">📚 Vocabulary</span>
+    <span class="pill">💬 Idioms</span>
+    <span class="pill">🏃 Daily Activities</span>
+    <span class="pill">🧠 Quiz</span>
+  </div>
+</div>
+
+<div class="class-section">
+  <h3>Select Your Class</h3>
+  <div class="class-tabs">
+    <button class="ctab active" onclick="setClass(0,this)">🌱 LKG</button>
+    <button class="ctab" onclick="setClass(1,this)">⭐ UKG</button>
+    <button class="ctab" onclick="setClass(2,this)">📚 Class 1</button>
+    <button class="ctab" onclick="setClass(3,this)">🔢 Class 2</button>
+    <button class="ctab" onclick="setClass(4,this)">🌍 Class 3</button>
+    <button class="ctab" onclick="setClass(5,this)">🚀 Class 4</button>
+    <button class="ctab" onclick="setClass(6,this)">🏆 Class 5</button>
+  </div>
+</div>
+
+<div class="main">
+  <div class="day-nav">
+    <button class="dnbtn" id="prevBtn" onclick="changeDay(-1)" disabled>← Prev</button>
+    <div class="day-info">
+      <div class="day-num" id="dayNum">Day 1</div>
+      <div class="day-top" id="dayTopic">Loading...</div>
+    </div>
+    <button class="dnbtn" id="nextBtn" onclick="changeDay(1)">Next →</button>
+  </div>
+  <div class="prog-wrap"><div class="prog-fill" id="progFill" style="width:3.33%"></div></div>
+  <div id="content"></div>
+</div>
+
+<footer><p>🎨 <span>RangShiksha</span> — 30 Days · LKG to Class 5 · English © 2026</p><p style="margin-top:6px">Contact: aditibhati.555@gmail.com · Built for Indian Schools</p></footer>
+
+<script>
+// ============================================================
+// CONTENT DATABASE — 7 classes × 30 days
+// Each day: spelling, wordBuild, pronunciation, vocab, idioms, activity, quiz
+// ============================================================
+
+const classNames = ['LKG','UKG','Class 1','Class 2','Class 3','Class 4','Class 5'];
+
+// Helper to generate days
+function day(topic, sp, wb, pr, vc, id, ac, qz){
+  return {topic, spelling:sp, wordBuild:wb, pronunciation:pr, vocab:vc, idioms:id, activity:ac, quiz:qz};
+}
+
+// ---- LKG (30 days) ----
+const lkg = [
+  day("Letters A-E",
+    [{pre:"A",bl:"___",ans:["Apple","Ant"],mean:"A is for Apple 🍎"},{pre:"B",bl:"___",ans:["Ball","Bat"],mean:"B is for Ball ⚽"},{pre:"C",bl:"___",ans:["Cat","Cow"],mean:"C is for Cat 🐱"},{pre:"D",bl:"___",ans:["Dog","Duck"],mean:"D is for Dog 🐶"}],
+    [{parts:["A","nt"],res:"Ant",mean:"A tiny insect 🐜"},{parts:["B","at"],res:"Bat",mean:"Used to hit a ball 🏏"},{parts:["C","up"],res:"Cup",mean:"We drink from it ☕"},{parts:["D","og"],res:"Dog",mean:"A pet animal 🐶"}],
+    [{rule:"Say A",sound:"like in 'Apple'",ex:[{w:"Apple",h:"AP-ul"},{w:"Ant",h:"ANT"},{w:"Air",h:"AIR"}]},{rule:"Say B",sound:"like in 'Ball'",ex:[{w:"Ball",h:"BAWL"},{w:"Bat",h:"BAT"},{w:"Bus",h:"BUS"}]}],
+    [{w:"Big",m:"Large in size",u:"The elephant is big."},{w:"Small",m:"Tiny in size",u:"The ant is small."},{w:"Red",m:"A bright color",u:"The apple is red."},{w:"Hot",m:"Very warm",u:"The sun is hot."}],
+    [{ph:"Wake up!",mean:"Time to get out of bed",use:"Wake up! It is morning time."},{ph:"Good morning!",mean:"Hello in the morning",use:"Good morning teacher!"}],
+    [{icon:"🦷",name:"Brush Teeth",steps:["Pick up your toothbrush","Put toothpaste on it","Brush up and down","Rinse with water","Smile! 😊"]},{icon:"🧼",name:"Wash Hands",steps:["Turn on the tap","Wet your hands","Use soap","Rub for 20 seconds","Dry with a towel"]}],
+    {q:"What does A stand for?",opts:["Ant","Dog","Cat","Ball"],ans:0,exp:"A is for Ant 🐜 — and also Apple, Air!"}
+  ),
+  day("Letters F-J",
+    [{pre:"F",bl:"___",ans:["Fish","Frog"],mean:"F is for Fish 🐟"},{pre:"G",bl:"___",ans:["Goat","Grass"],mean:"G is for Goat 🐐"},{pre:"H",bl:"___",ans:["Hat","Hen"],mean:"H is for Hat 🎩"},{pre:"I",bl:"___",ans:["Ice","Ink"],mean:"I is for Ice 🧊"}],
+    [{parts:["F","an"],res:"Fan",mean:"Makes cool air 🌀"},{parts:["G","um"],res:"Gum",mean:"Sticky sweet 🍬"},{parts:["H","en"],res:"Hen",mean:"A female chicken 🐔"},{parts:["J","ar"],res:"Jar",mean:"A glass container 🫙"}],
+    [{rule:"Say F",sound:"blow air through teeth",ex:[{w:"Fish",h:"FISH"},{w:"Fan",h:"FAN"},{w:"Frog",h:"FROG"}]},{rule:"Say G",sound:"from throat",ex:[{w:"Goat",h:"GOHT"},{w:"Grass",h:"GRAS"},{w:"Girl",h:"GURL"}]}],
+    [{w:"Fast",m:"Moving quickly",u:"The cheetah is fast."},{w:"Slow",m:"Not moving fast",u:"The turtle is slow."},{w:"Good",m:"Nice and kind",u:"She is a good girl."},{w:"Bad",m:"Not good",u:"Eating too much sugar is bad."}],
+    [{ph:"No worries!",mean:"It is okay, don't feel bad",use:"You fell down? No worries, get up!"},{ph:"Well done!",mean:"You did great work",use:"Well done! You wrote A to Z!"}],
+    [{icon:"👗",name:"Get Dressed",steps:["Pick your clothes","Wear your vest first","Put on your shirt","Wear your pants","Put on your shoes"]},{icon:"🎒",name:"Pack School Bag",steps:["Check your timetable","Put books inside","Add your lunch box","Put water bottle","Zip the bag closed"]}],
+    {q:"What does F stand for?",opts:["Fan","Hat","Goat","Ice"],ans:0,exp:"F is for Fan 🌀 — also Fish and Frog!"}
+  ),
+  day("Letters K-O",
+    [{pre:"K",bl:"___",ans:["Kite","King"],mean:"K is for Kite 🪁"},{pre:"L",bl:"___",ans:["Lion","Lamp"],mean:"L is for Lion 🦁"},{pre:"M",bl:"___",ans:["Mango","Moon"],mean:"M is for Mango 🥭"},{pre:"N",bl:"___",ans:["Nest","Nose"],mean:"N is for Nest 🪺"}],
+    [{parts:["K","ey"],res:"Key",mean:"Opens a lock 🔑"},{parts:["L","eg"],res:"Leg",mean:"Part of your body 🦵"},{parts:["M","ap"],res:"Map",mean:"Shows places 🗺️"},{parts:["N","et"],res:"Net",mean:"Used to catch fish 🎣"}],
+    [{rule:"Say K",sound:"hard sound from throat",ex:[{w:"Kite",h:"KITE"},{w:"King",h:"KING"},{w:"Key",h:"KEE"}]},{rule:"Say L",sound:"tongue touches top",ex:[{w:"Lion",h:"LY-un"},{w:"Lamp",h:"LAMP"},{w:"Leg",h:"LEG"}]}],
+    [{w:"Long",m:"Not short",u:"The snake is long."},{w:"Short",m:"Not long or tall",u:"The pencil is short."},{w:"Wet",m:"Full of water",u:"The towel is wet."},{w:"Dry",m:"No water",u:"The sand is dry."}],
+    [{ph:"Come on!",mean:"Let us go, hurry up",use:"Come on! The bus is here."},{ph:"Look out!",mean:"Be careful, danger near",use:"Look out! There is a car coming."}],
+    [{icon:"🍳",name:"Make Breakfast",steps:["Wash your hands first","Get your bowl and spoon","Pour cornflakes in bowl","Add milk slowly","Eat with a spoon 😋"]},{icon:"🛏️",name:"Make Your Bed",steps:["Get up from bed","Pull up the bedsheet","Straighten the pillow","Fold the blanket neatly","Your room looks clean!"]}],
+    {q:"M is for?",opts:["Nest","Kite","Mango","Lion"],ans:2,exp:"M is for Mango 🥭 — also Moon and Monkey!"}
+  ),
+  day("Letters P-T",
+    [{pre:"P",bl:"___",ans:["Pen","Pig"],mean:"P is for Pen ✏️"},{pre:"Q",bl:"___",ans:["Queen","Quilt"],mean:"Q is for Queen 👸"},{pre:"R",bl:"___",ans:["Rain","Rose"],mean:"R is for Rain 🌧️"},{pre:"S",bl:"___",ans:["Sun","Star"],mean:"S is for Sun ☀️"}],
+    [{parts:["P","ot"],res:"Pot",mean:"Used for cooking 🍲"},{parts:["R","at"],res:"Rat",mean:"A small animal 🐀"},{parts:["S","un"],res:"Sun",mean:"Gives us light ☀️"},{parts:["T","ap"],res:"Tap",mean:"Water comes from it 🚿"}],
+    [{rule:"Say P",sound:"puff of air from lips",ex:[{w:"Pen",h:"PEN"},{w:"Pig",h:"PIG"},{w:"Pot",h:"POT"}]},{rule:"Say R",sound:"tongue curls back",ex:[{w:"Rain",h:"RAIN"},{w:"Rose",h:"ROHZ"},{w:"Rat",h:"RAT"}]}],
+    [{w:"Clean",m:"No dirt",u:"Keep your room clean."},{w:"Dirty",m:"Has mud or dust",u:"Wash your dirty hands."},{w:"Happy",m:"Feeling of joy",u:"I am happy today."},{w:"Sad",m:"Feeling of sorrow",u:"Don't be sad."}],
+    [{ph:"Piece of cake!",mean:"Something very easy",use:"This puzzle is a piece of cake!"},{ph:"Hang on!",mean:"Wait for a moment",use:"Hang on! I am coming."}],
+    [{icon:"🌿",name:"Water Plants",steps:["Fill a small watering can","Go to the plant","Pour water slowly near roots","Don't pour too much","Watch the plant grow 🌱"]},{icon:"🍽️",name:"Set the Table",steps:["Get the plates","Place a plate for each person","Put spoon and fork beside","Place a glass for water","Call everyone to eat"]}],
+    {q:"S is for?",opts:["Rain","Sun","Pen","Queen"],ans:1,exp:"S is for Sun ☀️ — also Star and Snake!"}
+  ),
+  day("Letters U-Z",
+    [{pre:"U",bl:"___",ans:["Umbrella","Up"],mean:"U is for Umbrella ☂️"},{pre:"V",bl:"___",ans:["Van","Vine"],mean:"V is for Van 🚐"},{pre:"W",bl:"___",ans:["Water","Wind"],mean:"W is for Water 💧"},{pre:"X",bl:"___",ans:["X-ray","Xylophone"],mean:"X is for X-ray 🩻"}],
+    [{parts:["U","p"],res:"Up",mean:"Direction above ⬆️"},{parts:["V","an"],res:"Van",mean:"A big vehicle 🚐"},{parts:["W","eb"],res:"Web",mean:"Spider makes it 🕸️"},{parts:["Z","oo"],res:"Zoo",mean:"Animals live here 🦁"}],
+    [{rule:"Say U",sound:"like 'uh' or 'you'",ex:[{w:"Up",h:"UP"},{w:"Under",h:"UN-der"},{w:"Use",h:"YOOZ"}]},{rule:"Say W",sound:"lips make O shape",ex:[{w:"Water",h:"WAH-ter"},{w:"Wind",h:"WIND"},{w:"Web",h:"WEB"}]}],
+    [{w:"Up",m:"Higher place",u:"The bird flew up."},{w:"Down",m:"Lower place",u:"Come down from the tree."},{w:"In",m:"Inside",u:"The cat is in the box."},{w:"Out",m:"Outside",u:"Go out and play."}],
+    [{ph:"You rock!",mean:"You are amazing",use:"You wrote all 26 letters! You rock!"},{ph:"Keep it up!",mean:"Continue doing well",use:"Keep it up! You are learning fast."}],
+    [{icon:"🚿",name:"Take a Bath",steps:["Turn on the shower or tap","Check water is not too hot","Soap your body gently","Wash off the soap","Dry yourself with a towel"]},{icon:"🌙",name:"Bedtime Routine",steps:["Drink a glass of milk","Brush your teeth","Change to night clothes","Say goodnight to family","Sleep by 9 PM 💤"]}],
+    {q:"U is for?",opts:["Van","Zoo","Umbrella","Web"],ans:2,exp:"U is for Umbrella ☂️ — it keeps us dry in rain!"}
+  ),
+  day("Simple Words — CVC",
+    [{pre:"C_",bl:"t",ans:["Cat","Cut","Cot"],mean:"C + vowel + t words"},{pre:"B_",bl:"g",ans:["Bag","Big","Bug"],mean:"B + vowel + g words"},{pre:"H_",bl:"t",ans:["Hat","Hit","Hot","Hut"],mean:"H + vowel + t words"},{pre:"P_",bl:"n",ans:["Pan","Pin","Pen","Pun"],mean:"P + vowel + n words"}],
+    [{parts:["c","at"],res:"cat",mean:"Pet animal 🐱"},{parts:["b","ig"],res:"big",mean:"Large size"},{parts:["h","ot"],res:"hot",mean:"Very warm ☀️"},{parts:["p","en"],res:"pen",mean:"For writing ✒️"}],
+    [{rule:"CVC pattern",sound:"Consonant-Vowel-Consonant",ex:[{w:"cat",h:"K-A-T"},{w:"big",h:"B-I-G"},{w:"hot",h:"H-O-T"}]},{rule:"Short vowels",sound:"a e i o u (short)",ex:[{w:"bat",h:"short A"},{w:"bed",h:"short E"},{w:"bit",h:"short I"}]}],
+    [{w:"Run",m:"Move fast with legs",u:"I can run fast."},{w:"Jump",m:"Spring into the air",u:"Jump over the puddle."},{w:"Sit",m:"Rest on a seat",u:"Please sit down."},{w:"Stand",m:"Be on your feet",u:"Stand up straight."}],
+    [{ph:"Rise and shine!",mean:"Wake up and be cheerful",use:"Rise and shine! A new day has come."},{ph:"Sweet dreams!",mean:"Have a good sleep",use:"Goodnight! Sweet dreams!"}],
+    [{icon:"🎨",name:"Drawing Time",steps:["Get your crayons and paper","Draw a big sun in the corner","Draw a house below","Add trees and flowers","Color everything bright 🌈"]},{icon:"🧹",name:"Clean Your Room",steps:["Pick up toys from the floor","Put books on the shelf","Make your bed neatly","Throw rubbish in the bin","Look how tidy it is!"]}],
+    {q:"Which is a CVC word?",opts:["Street","Cat","Play","Train"],ans:1,exp:"Cat = C-A-T = Consonant Vowel Consonant ✓ Simple 3-letter pattern!"}
+  ),
+  day("Colors and Shapes",
+    [{pre:"Sq",bl:"uare",ans:["Square"],mean:"4 equal sides ◼️"},{pre:"Cir",bl:"cle",ans:["Circle"],mean:"Round shape ⭕"},{pre:"Tri",bl:"angle",ans:["Triangle"],mean:"3 sides △"},{pre:"Rec",bl:"tangle",ans:["Rectangle"],mean:"4 sides, 2 long 2 short"}],
+    [{parts:["red","dish"],res:"reddish",mean:"A bit red in color"},{parts:["blue","bell"],res:"bluebell",mean:"A blue flower 🔵"},{parts:["green","grass"],res:"greengrass",mean:"Grass is green 🌿"},{parts:["sun","flower"],res:"sunflower",mean:"Yellow like sun 🌻"}],
+    [{rule:"Color words",sound:"describe what we see",ex:[{w:"Red",h:"RED"},{w:"Blue",h:"BLOO"},{w:"Green",h:"GREEN"}]},{rule:"Shape words",sound:"describe the form",ex:[{w:"Circle",h:"SUR-kul"},{w:"Square",h:"SKWAIR"},{w:"Triangle",h:"TRY-ang-ul"}]}],
+    [{w:"Round",m:"Circle shape",u:"The ball is round."},{w:"Straight",m:"No curves or bends",u:"Draw a straight line."},{w:"Bright",m:"Very colorful or shiny",u:"The sun is bright."},{w:"Dark",m:"No light",u:"The night is dark."}],
+    [{ph:"Out of the blue",mean:"Something unexpected",use:"Out of the blue it started raining."},{ph:"Tickled pink",mean:"Very happy",use:"I was tickled pink to get a gift."}],
+    [{icon:"🎨",name:"Paint a Picture",steps:["Get your paints and brush","Draw lightly with pencil first","Start with light colors","Then add dark colors","Let it dry before touching"]},{icon:"🧩",name:"Play with Shapes",steps:["Get your shape blocks","Name each shape aloud","Sort by color","Sort by size","Make a picture with them"]}],
+    {q:"How many sides does a triangle have?",opts:["2","3","4","5"],ans:1,exp:"Triangle = 3 sides 🔺 Tri means THREE — tricycle also has 3 wheels!"}
+  ),
+  day("Numbers 1-10",
+    [{pre:"On",bl:"e",ans:["One"],mean:"1 — first number"},{pre:"Tw",bl:"o",ans:["Two"],mean:"2 — a pair"},{pre:"Thr",bl:"ee",ans:["Three"],mean:"3 — like a triangle"},{pre:"Fi",bl:"ve",ans:["Five"],mean:"5 — fingers on one hand"}],
+    [{parts:["one","self"],res:"oneself",mean:"By yourself alone"},{parts:["two","some"],res:"twosome",mean:"A pair of two people"},{parts:["three","fold"],res:"threefold",mean:"Three times as much"},{parts:["ten","pin"],res:"tenpin",mean:"A bowling game 🎳"}],
+    [{rule:"Number words",sound:"say clearly",ex:[{w:"One",h:"WUN"},{w:"Two",h:"TOO"},{w:"Three",h:"THREE"}]},{rule:"Tricky spellings",sound:"not like they look",ex:[{w:"One",h:"sounds like WUN not OH-ne"},{w:"Two",h:"sounds like TOO not TAH-wo"},{w:"Eight",h:"sounds like ATE"}]}],
+    [{w:"First",m:"Number 1 position",u:"I came first in race."},{w:"Last",m:"Final position",u:"She was last in line."},{w:"Many",m:"A large number",u:"There are many stars."},{w:"Few",m:"A small number",u:"Only a few birds came."}],
+    [{ph:"Once in a blue moon",mean:"Something that rarely happens",use:"We visit the zoo once in a blue moon."},{ph:"Two peas in a pod",mean:"Very similar people",use:"The twins are like two peas in a pod."}],
+    [{icon:"🛒",name:"Count at Market",steps:["Go to the vegetable shop","Count the tomatoes","Count the potatoes","Ask Mummy how many we need","Help carry one bag home"]},{icon:"📐",name:"Count in Class",steps:["Count your crayons","Count your books","Count your classmates","Write the numbers down","Show your teacher"]}],
+    {q:"How do you spell 5?",opts:["Fife","Five","Fiev","Fiv"],ans:1,exp:"Five ✓ — F-I-V-E — five fingers on your hand! 🖐️"}
+  ),
+  day("Body Parts",
+    [{pre:"Sh",bl:"oulder",ans:["Shoulder"],mean:"Top of your arm 💪"},{pre:"St",bl:"omach",ans:["Stomach"],mean:"Where food goes 🫃"},{pre:"Fo",bl:"rehead",ans:["Forehead"],mean:"Above your eyes"},{pre:"Th",bl:"umb",ans:["Thumb"],mean:"Short fat finger 👍"}],
+    [{parts:["eye","brow"],res:"eyebrow",mean:"Hair above your eye"},{parts:["fore","head"],res:"forehead",mean:"Front of your head"},{parts:["thumb","nail"],res:"thumbnail",mean:"Nail on your thumb"},{parts:["ear","drum"],res:"eardrum",mean:"Inside your ear"}],
+    [{rule:"Body words",sound:"say each part",ex:[{w:"Shoulder",h:"SHOHL-der"},{w:"Stomach",h:"STUM-uk"},{w:"Forehead",h:"FOR-hed"}]},{rule:"Silent letters",sound:"not spoken",ex:[{w:"Thumb",h:"THUM (b is silent)"},{w:"Knee",h:"NEE (k is silent)"},{w:"Wrist",h:"RIST (w is silent)"}]}],
+    [{w:"Touch",m:"Feel with fingers",u:"Touch the soft cotton."},{w:"Smell",m:"Use nose to sense",u:"I can smell flowers."},{w:"Taste",m:"Use tongue to sense",u:"Taste the sweet mango."},{w:"Hear",m:"Use ears to sense",u:"I can hear birds."}],
+    [{ph:"Keep an eye on",mean:"Watch carefully",use:"Keep an eye on your little sister."},{ph:"Lend a hand",mean:"Help someone",use:"Can you lend a hand with the bags?"}],
+    [{icon:"🤸",name:"Morning Exercise",steps:["Stand up straight","Stretch your arms up","Touch your toes slowly","Jump 10 times","Take a deep breath in and out"]},{icon:"🪥",name:"Oral Hygiene",steps:["Brush teeth for 2 minutes","Brush tongue gently","Gargle with water","Floss between teeth","Rinse and smile!"]}],
+    {q:"Which body part is silent in 'Thumb'?",opts:["T","H","U","B"],ans:3,exp:"Thumb → THUM — the B is silent! 👍 (Also Lamb, Comb — b is silent at end!)"}
+  ),
+  day("Family Words",
+    [{pre:"Moth",bl:"er",ans:["Mother"],mean:"Mummy — she cares for us ❤️"},{pre:"Fath",ans:["Father"],bl:"er",mean:"Daddy — he protects us"},{pre:"Broth",bl:"er",ans:["Brother"],mean:"A boy sibling"},{pre:"Sist",bl:"er",ans:["Sister"],mean:"A girl sibling"}],
+    [{parts:["grand","mother"],res:"grandmother",mean:"Father or mother's mother 👵"},{parts:["grand","father"],res:"grandfather",mean:"Father or mother's father 👴"},{parts:["step","sister"],res:"stepsister",mean:"Sister through a step parent"},{parts:["new","born"],res:"newborn",mean:"A just-born baby 👶"}],
+    [{rule:"Family words",sound:"warm and soft",ex:[{w:"Mother",h:"MUH-ther"},{w:"Father",h:"FAH-ther"},{w:"Brother",h:"BRUH-ther"}]},{rule:"-er ending",sound:"a person who does",ex:[{w:"Teacher",h:"one who teaches"},{w:"Mother",h:"one who mothers"},{w:"Sister",h:"female sibling"}]}],
+    [{w:"Love",m:"Deep care for someone",u:"I love my family."},{w:"Care",m:"Look after someone",u:"Parents care for children."},{w:"Share",m:"Give part to others",u:"Share your toys kindly."},{w:"Help",m:"Make things easier",u:"Help Mummy in the kitchen."}],
+    [{ph:"Blood is thicker than water",mean:"Family comes first",use:"We should support family — blood is thicker than water."},{ph:"Like father like son",mean:"Child is similar to parent",use:"He loves cricket — like father like son!"}],
+    [{icon:"🍳",name:"Help in Kitchen",steps:["Wash your hands first","Ask what you can help with","Hand vegetables to Mummy","Stir slowly if allowed","Say thank you after eating"]},{icon:"🛁",name:"Help Younger Sibling",steps:["Fill the tub with warm water","Check water temperature","Gently wash their hair","Dry them with a soft towel","Help them get dressed"]}],
+    {q:"What does 'Grandmother' mean?",opts:["Mother's friend","Father's sister","Parent's mother","Baby's mother"],ans:2,exp:"Grandmother = Grand + Mother = your parent's mother 👵 Grand means one level above!"}
+  ),
+  // Days 11-30 for LKG
+  day("Animals on Farm",
+    [{pre:"Ch",bl:"icken",ans:["Chicken"],mean:"Lays eggs 🐔"},{pre:"Sh",bl:"eep",ans:["Sheep"],mean:"Gives us wool 🐑"},{pre:"Co",bl:"w",ans:["Cow"],mean:"Gives us milk 🐄"},{pre:"Ho",bl:"rse",ans:["Horse"],mean:"We can ride it 🐎"}],
+    [{parts:["farm","yard"],res:"farmyard",mean:"Area around a farm"},{parts:["hen","house"],res:"henhouse",mean:"Where hens live"},{parts:["milk","man"],res:"milkman",mean:"Person who brings milk"},{parts:["hay","stack"],res:"haystack",mean:"Pile of dried grass"}],
+    [{rule:"Farm animal sounds",sound:"each animal speaks",ex:[{w:"Cow",h:"MOO 🐄"},{w:"Sheep",h:"BAA 🐑"},{w:"Horse",h:"NEIGH 🐎"}]},{rule:"-ck ending",sound:"sounds like K",ex:[{w:"Duck",h:"DUK"},{w:"Cluck",h:"KLUK"},{w:"Peck",h:"PEK"}]}],
+    [{w:"Soft",m:"Smooth to touch",u:"The sheep wool is soft."},{w:"Hard",m:"Not soft",u:"The egg shell is hard."},{w:"Loud",m:"Makes big sound",u:"The cock is loud."},{w:"Quiet",m:"Very little sound",u:"The mouse is quiet."}],
+    [{ph:"Dark horse",mean:"Surprise performer",use:"She won the race — what a dark horse!"},{ph:"Bull in a china shop",mean:"Clumsy person",use:"He broke three cups — like a bull in a china shop!"}],
+    [{icon:"🐄",name:"Visit a Farm",steps:["Wake up early morning","Wear old clothes and boots","Feed the animals grain","Collect eggs from henhouse","Drink fresh warm milk"]}
+    ,{icon:"🌾",name:"Grow a Plant",steps:["Get a small pot and soil","Put soil in the pot","Push a seed inside","Water it every day","Watch it grow in sunlight"]}],
+    {q:"Which animal gives us milk?",opts:["Hen","Horse","Cow","Sheep"],ans:2,exp:"Cow gives us milk 🐄 — and also sheep give wool and hen gives eggs!"}
+  ),
+  day("Fruits and Vegetables",
+    [{pre:"Man",bl:"go",ans:["Mango"],mean:"King of fruits 🥭"},{pre:"Ban",bl:"ana",ans:["Banana"],mean:"Yellow and curved 🍌"},{pre:"Tom",bl:"ato",ans:["Tomato"],mean:"Red and juicy 🍅"},{pre:"Pot",bl:"ato",ans:["Potato"],mean:"Grows underground 🥔"}],
+    [{parts:["pine","apple"],res:"pineapple",mean:"A tropical fruit 🍍"},{parts:["water","melon"],res:"watermelon",mean:"Red inside, green outside 🍉"},{parts:["green","house"],res:"greenhouse",mean:"Where plants grow inside glass"},{parts:["sun","flower"],res:"sunflower",mean:"Faces the sun 🌻"}],
+    [{rule:"Fruit names",sound:"say clearly",ex:[{w:"Mango",h:"MANG-oh"},{w:"Banana",h:"bah-NAH-nah"},{w:"Pineapple",h:"PINE-ap-ul"}]},{rule:"-ato ending",sound:"sounds like AY-toh",ex:[{w:"Tomato",h:"tuh-MAY-toh"},{w:"Potato",h:"puh-TAY-toh"}]}],
+    [{w:"Sweet",m:"Tastes like sugar",u:"Mango is sweet."},{w:"Sour",m:"Sharp taste like lemon",u:"Lemon is sour."},{w:"Ripe",m:"Ready to eat",u:"The banana is ripe."},{w:"Raw",m:"Not cooked or ripe",u:"Raw mango is sour."}],
+    [{ph:"An apple a day",mean:"Eating healthy keeps you well",use:"An apple a day keeps the doctor away!"},{ph:"Go bananas",mean:"Become very excited",use:"The children went bananas at the party!"}],
+    [{icon:"🛒",name:"Buy Vegetables",steps:["Go to the sabzi mandi","Look at all the vegetables","Pick fresh ones","Ask the price","Pay and carry home"]},{icon:"🥗",name:"Make a Fruit Salad",steps:["Wash all fruits well","Cut banana and apple (with help)","Add grapes whole","Mix in a bowl","Squeeze lemon on top"]}],
+    {q:"Which fruit is called King of Fruits?",opts:["Apple","Banana","Mango","Grape"],ans:2,exp:"Mango 🥭 is the King of Fruits — India grows the most mangoes in the world!"}
+  ),
+  day("Transport",
+    [{pre:"Tr",bl:"ain",ans:["Train"],mean:"Runs on railway tracks 🚂"},{pre:"Pl",bl:"ane",ans:["Plane"],mean:"Flies in the sky ✈️"},{pre:"Bo",bl:"at",ans:["Boat"],mean:"Travels on water ⛵"},{pre:"Bu",bl:"s",ans:["Bus"],mean:"Carries many people 🚌"}],
+    [{parts:["air","port"],res:"airport",mean:"Where planes land ✈️"},{parts:["rail","way"],res:"railway",mean:"Train tracks 🚂"},{parts:["sea","port"],res:"seaport",mean:"Where ships dock ⚓"},{parts:["motor","bike"],res:"motorbike",mean:"Two-wheeled vehicle 🏍️"}],
+    [{rule:"Transport words",sound:"say each clearly",ex:[{w:"Train",h:"TRAYN"},{w:"Plane",h:"PLAYN"},{w:"Boat",h:"BOHT"}]},{rule:"-ane ending",sound:"long A sound",ex:[{w:"Plane",h:"PLAYN"},{w:"Lane",h:"LAYN"},{w:"Crane",h:"KRAYN"}]}],
+    [{w:"Fast",m:"Moving at high speed",u:"The train is very fast."},{w:"Slow",m:"Moving at low speed",u:"The bullock cart is slow."},{w:"Heavy",m:"A lot of weight",u:"The truck is heavy."},{w:"Light",m:"Little weight",u:"The bicycle is light."}],
+    [{ph:"Miss the boat",mean:"Miss an opportunity",use:"Apply now or you will miss the boat!"},{ph:"In the same boat",mean:"Same difficult situation",use:"We are all in the same boat this exam."}],
+    [{icon:"🚌",name:"Take a Bus",steps:["Wait at the bus stop","Let others get off first","Get on and find a seat","Hold the handle rail","Press the bell at your stop"]},{icon:"✈️",name:"At the Airport",steps:["Show your ticket at entry","Put bags through scanner","Go to your gate number","Board when called","Fasten your seatbelt"]}],
+    {q:"Which transport flies in the sky?",opts:["Boat","Train","Bus","Plane"],ans:3,exp:"Plane ✈️ flies in the sky! Airport is where planes land and take off."}
+  ),
+  day("Weather and Seasons",
+    [{pre:"Ra",bl:"in",ans:["Rain"],mean:"Water falling from clouds 🌧️"},{pre:"Su",bl:"n",ans:["Sun"],mean:"Gives us light and heat ☀️"},{pre:"Wi",bl:"nd",ans:["Wind"],mean:"Moving air 💨"},{pre:"Sn",bl:"ow",ans:["Snow"],mean:"White frozen water ❄️"}],
+    [{parts:["rain","bow"],res:"rainbow",mean:"Colors after rain 🌈"},{parts:["sun","shine"],res:"sunshine",mean:"Light from the sun ☀️"},{parts:["snow","flake"],res:"snowflake",mean:"One piece of snow ❄️"},{parts:["thunder","storm"],res:"thunderstorm",mean:"Rain with lightning ⛈️"}],
+    [{rule:"Weather words",sound:"say with feeling",ex:[{w:"Rain",h:"RAYN"},{w:"Snow",h:"SNOH"},{w:"Wind",h:"WIND"}]},{rule:"Season names",sound:"four seasons",ex:[{w:"Summer",h:"SUM-er (hot)"},{w:"Winter",h:"WIN-ter (cold)"},{w:"Monsoon",h:"mon-SOON (rainy)"}]}],
+    [{w:"Hot",m:"High temperature",u:"Summer is very hot."},{w:"Cold",m:"Low temperature",u:"Winter is very cold."},{w:"Wet",m:"Full of water",u:"My clothes got wet in rain."},{w:"Foggy",m:"Hard to see through mist",u:"Delhi is foggy in winter."}],
+    [{ph:"Every cloud has a silver lining",mean:"Good comes after bad times",use:"Don't worry — every cloud has a silver lining!"},{ph:"Rain on your parade",mean:"Spoil your happy moment",use:"Don't let anyone rain on your parade."}],
+    [{icon:"🌂",name:"Rainy Day Routine",steps:["Check if it is raining","Carry your umbrella","Wear waterproof shoes","Walk carefully in puddles","Dry off when you get home"]},{icon:"☀️",name:"Summer Afternoon",steps:["Stay indoors in peak heat","Drink water every hour","Wear light cotton clothes","Eat cooling foods like curd","Go out after 5 PM only"]}],
+    {q:"What appears in the sky after rain?",opts:["Snow","Rainbow","Thunder","Fog"],ans:1,exp:"Rainbow 🌈 appears after rain — it has 7 colors: VIBGYOR!"}
+  ),
+  day("School Life",
+    [{pre:"Te",bl:"acher",ans:["Teacher"],mean:"Person who teaches us 👩‍🏫"},{pre:"Cla",bl:"ssroom",ans:["Classroom"],mean:"Where we study 📚"},{pre:"Bla",bl:"ckboard",ans:["Blackboard"],mean:"Teacher writes on it"},{pre:"Un",bl:"iform",ans:["Uniform"],mean:"School clothes we wear"}],
+    [{parts:["class","room"],res:"classroom",mean:"Our learning space"},{parts:["note","book"],res:"notebook",mean:"We write in it 📓"},{parts:["home","work"],res:"homework",mean:"Work done at home"},{parts:["play","ground"],res:"playground",mean:"Where we play 🏃"}],
+    [{rule:"School words",sound:"say clearly",ex:[{w:"Teacher",h:"TEE-cher"},{w:"Classroom",h:"KLAS-room"},{w:"Uniform",h:"YOO-ni-form"}]},{rule:"-oom ending",sound:"long OO",ex:[{w:"Classroom",h:"KLAS-room"},{w:"Bedroom",h:"BED-room"},{w:"Mushroom",h:"MUSH-room"}]}],
+    [{w:"Learn",m:"Gain knowledge",u:"We learn new things daily."},{w:"Write",m:"Put words on paper",u:"Write your name neatly."},{w:"Read",m:"Look at and understand words",u:"Read the story aloud."},{w:"Listen",m:"Pay attention to sounds",u:"Listen carefully to teacher."}],
+    [{ph:"Hit the books",mean:"Study hard",use:"Exams are near — time to hit the books!"},{ph:"Teacher's pet",mean:"Teacher's favorite student",use:"She always answers first — she is the teacher's pet."}],
+    [{icon:"🎒",name:"Morning School Routine",steps:["Wake up at 6:30 AM","Brush teeth and bathe","Wear school uniform neatly","Eat a good breakfast","Reach school before bell"]},{icon:"📚",name:"Study Time at Home",steps:["Find a quiet spot","Keep all books ready","Start with hardest subject","Take a 5-minute break","Review what you learned"]}],
+    {q:"What do we call where we study?",opts:["Kitchen","Bedroom","Classroom","Bathroom"],ans:2,exp:"Classroom ✓ — Class + Room = the room where our class is held! 📚"}
+  ),
+  day("Food we Eat",
+    [{pre:"Bre",bl:"ad",ans:["Bread"],mean:"We spread butter on it 🍞"},{pre:"Ri",bl:"ce",ans:["Rice"],mean:"Staple food of India 🍚"},{pre:"Dal",bl:"",ans:["Dal"],mean:"Lentil soup — healthy 🍲"},{pre:"Rot",bl:"i",ans:["Roti"],mean:"Indian flatbread 🫓"}],
+    [{parts:["break","fast"],res:"breakfast",mean:"First meal of the day 🍳"},{parts:["cup","cake"],res:"cupcake",mean:"Small sweet cake 🧁"},{parts:["pop","corn"],res:"popcorn",mean:"Puffed corn snack 🍿"},{parts:["milk","shake"],res:"milkshake",mean:"Cold milk drink 🥛"}],
+    [{rule:"Food words",sound:"say each clearly",ex:[{w:"Breakfast",h:"BREK-fust"},{w:"Lunch",h:"LUNCH"},{w:"Dinner",h:"DIN-er"}]},{rule:"Meal times",sound:"three meals a day",ex:[{w:"Breakfast",h:"morning meal"},{w:"Lunch",h:"afternoon meal"},{w:"Dinner",h:"evening meal"}]}],
+    [{w:"Hungry",m:"Need to eat food",u:"I am hungry for lunch."},{w:"Full",m:"Cannot eat more",u:"I am full, thank you."},{w:"Tasty",m:"Delicious and nice",u:"The biryani is tasty."},{w:"Fresh",m:"Just made, not old",u:"Eat fresh fruits daily."}],
+    [{ph:"Have a bite",mean:"Eat a little",use:"Have a bite of this sandwich!"},{ph:"Full to the brim",mean:"Completely full",use:"After dinner I was full to the brim."}],
+    [{icon:"🍱",name:"Pack Your Lunchbox",steps:["Choose healthy food","Add roti or rice","Add a vegetable or dal","Pack a fruit too","Close the box tightly"]},{icon:"🍽️",name:"Eating Manners",steps:["Wash hands before eating","Sit properly at the table","Don't talk with food in mouth","Chew slowly and properly","Thank the person who cooked"]}],
+    {q:"Which is the first meal of the day?",opts:["Dinner","Lunch","Breakfast","Snack"],ans:2,exp:"Breakfast ✓ — Break + Fast = you break your overnight fast! Most important meal!"}
+  ),
+  day("Opposites",
+    [{pre:"Happ",bl:"y ↔ Sad",ans:["Happy","Sad"],mean:"Feeling joy vs sorrow"},{pre:"Big",bl:" ↔ Small",ans:["Big","Small"],mean:"Large vs tiny"},{pre:"Hot",bl:" ↔ Cold",ans:["Hot","Cold"],mean:"Warm vs cool"},{pre:"Day",bl:" ↔ Night",ans:["Day","Night"],mean:"Light vs dark time"}],
+    [{parts:["in","side"],res:"inside",mean:"Opposite of outside 🏠"},{parts:["out","side"],res:"outside",mean:"Opposite of inside 🌳"},{parts:["up","stairs"],res:"upstairs",mean:"Floor above 🔝"},{parts:["down","stairs"],res:"downstairs",mean:"Floor below ⬇️"}],
+    [{rule:"Opposites",sound:"opposite meaning",ex:[{w:"Hot ↔ Cold",h:"temperature opposites"},{w:"Big ↔ Small",h:"size opposites"},{w:"Happy ↔ Sad",h:"feeling opposites"}]},{rule:"Adding UN-",sound:"makes opposite",ex:[{w:"Happy → Unhappy",h:"UN means NOT"},{w:"Kind → Unkind",h:"not kind"},{w:"Well → Unwell",h:"not well"}]}],
+    [{w:"Open",m:"Not closed",u:"Open the window please."},{w:"Close",m:"Shut",u:"Close your eyes and rest."},{w:"Full",m:"No space left",u:"My bag is full of books."},{w:"Empty",m:"Nothing inside",u:"The glass is empty."}],
+    [{ph:"On top of the world",mean:"Feeling very happy",use:"I got full marks — I feel on top of the world!"},{ph:"Under the weather",mean:"Feeling sick or unwell",use:"I am a bit under the weather today."}],
+    [{icon:"🔄",name:"Sort and Organize",steps:["Get your toy box","Take out all toys","Sort big and small toys","Put each type together","Big ones at back, small in front"]},{icon:"🌡️",name:"Hot and Cold Day",steps:["Feel the weather outside","If hot — drink cold water","Wear light clothes in heat","If cold — wear a sweater","Come inside before it gets dark"]}],
+    {q:"What is the opposite of Happy?",opts:["Angry","Sad","Tired","Bored"],ans:1,exp:"Happy ↔ Sad ✓ — When we are not happy we are sad! UN-happy also means not happy."}
+  ),
+  day("Action Words",
+    [{pre:"Runn",bl:"ing",ans:["Running"],mean:"Moving fast on feet 🏃"},{pre:"Jump",bl:"ing",ans:["Jumping"],mean:"Springing into air 🦘"},{pre:"Sing",bl:"ing",ans:["Singing"],mean:"Making music with voice 🎵"},{pre:"Draw",bl:"ing",ans:["Drawing"],mean:"Making pictures ✏️"}],
+    [{parts:["swim","ming"],res:"swimming",mean:"Moving through water 🏊"},{parts:["climb","ing"],res:"climbing",mean:"Going up something 🧗"},{parts:["sleep","ing"],res:"sleeping",mean:"Resting with eyes closed 😴"},{parts:["cook","ing"],res:"cooking",mean:"Making food 👨‍🍳"}],
+    [{rule:"-ING ending",sound:"action happening now",ex:[{w:"Run → Running",h:"RUN-ing"},{w:"Jump → Jumping",h:"JUMP-ing"},{w:"Sing → Singing",h:"SING-ing"}]},{rule:"Double consonant",sound:"before -ing",ex:[{w:"Swim → Swimming",h:"double M"},{w:"Run → Running",h:"double N"},{w:"Sit → Sitting",h:"double T"}]}],
+    [{w:"Jump",m:"Spring into the air",u:"Jump over the hurdle."},{w:"Crawl",m:"Move on hands and knees",u:"Babies crawl before they walk."},{w:"Dance",m:"Move to music",u:"We dance on Diwali."},{w:"Clap",m:"Hit hands together",u:"Clap for the winner!"}],
+    [{ph:"Jump for joy",mean:"Be extremely happy",use:"She jumped for joy when she won!"},{ph:"Hit the ground running",mean:"Start something with energy",use:"He hit the ground running on his first day."}],
+    [{icon:"🏃",name:"Physical Exercise",steps:["Stand in open space","Do 10 jumping jacks","Run on spot for 30 seconds","Do 5 slow squats","Finish with deep breaths"]},{icon:"🤸",name:"Yoga for Kids",steps:["Sit cross-legged on mat","Stretch arms to sky","Bend and touch toes","Lie flat and breathe","Feel relaxed and calm"]}],
+    {q:"What happens when we add -ING to 'swim'?",opts:["Swiming","Swimming","Swimimg","Swimmed"],ans:1,exp:"Swim → Swimming ✓ — double M before -ING! Same with run→running, sit→sitting!"}
+  ),
+  day("My House",
+    [{pre:"Kit",bl:"chen",ans:["Kitchen"],mean:"Where food is cooked 🍳"},{pre:"Bed",bl:"room",ans:["Bedroom"],mean:"Where we sleep 🛏️"},{pre:"Bath",bl:"room",ans:["Bathroom"],mean:"Where we bathe 🛁"},{pre:"Gar",bl:"den",ans:["Garden"],mean:"Where plants grow 🌺"}],
+    [{parts:["living","room"],res:"livingroom",mean:"Family sits together"},{parts:["bed","side"],res:"bedside",mean:"Next to the bed"},{parts:["door","step"],res:"doorstep",mean:"Step at the front door"},{parts:["window","sill"],res:"windowsill",mean:"Ledge of a window"}],
+    [{rule:"House rooms",sound:"-room ending",ex:[{w:"Bedroom",h:"BED-room"},{w:"Bathroom",h:"BATH-room"},{w:"Classroom",h:"KLAS-room"}]},{rule:"-en ending",sound:"places and things",ex:[{w:"Kitchen",h:"KITCH-en"},{w:"Garden",h:"GAR-den"},{w:"Chicken",h:"CHIK-en"}]}],
+    [{w:"Cozy",m:"Warm and comfortable",u:"Our home is cozy."},{w:"Neat",m:"Tidy and organized",u:"Keep your room neat."},{w:"Safe",m:"No danger here",u:"Home is a safe place."},{w:"Bright",m:"Full of light",u:"The kitchen is bright."}],
+    [{ph:"Home sweet home",mean:"Your own home is the best",use:"After holidays — home sweet home!"},{ph:"Make yourself at home",mean:"Be comfortable here",use:"Please sit — make yourself at home!"}],
+    [{icon:"🧹",name:"Clean the House",steps:["Start with your bedroom","Make your bed first","Sweep the floor","Dust the furniture","Mop with wet cloth last"]},{icon:"🌿",name:"Garden Work",steps:["Water plants in morning","Remove dry leaves","Pull out weeds gently","Add manure to soil","Watch new flowers bloom"]}],
+    {q:"Where do we cook food?",opts:["Bedroom","Garden","Bathroom","Kitchen"],ans:3,exp:"Kitchen ✓ — Kitchen = where we cook! Kitch comes from old word for cooking place."}
+  ),
+  day("Good Habits",
+    [{pre:"Pol",bl:"ite",ans:["Polite"],mean:"Mannerly and respectful"},{pre:"Hon",bl:"est",ans:["Honest"],mean:"Always tells the truth"},{pre:"Kinn",bl:"d",ans:["Kind"],mean:"Gentle and caring"},{pre:"Bra",bl:"ve",ans:["Brave"],mean:"Not afraid to do right"}],
+    [{parts:["good","ness"],res:"goodness",mean:"Quality of being good"},{parts:["kind","ness"],res:"kindness",mean:"Being kind to others"},{parts:["thank","ful"],res:"thankful",mean:"Feeling grateful"},{parts:["cheer","ful"],res:"cheerful",mean:"Always happy and smiling"}],
+    [{rule:"Good habit words",sound:"positive adjectives",ex:[{w:"Polite",h:"puh-LITE"},{w:"Honest",h:"ON-est"},{w:"Brave",h:"BRAYV"}]},{rule:"-ness ending",sound:"quality of",ex:[{w:"Kind + ness",h:"kindness = being kind"},{w:"Good + ness",h:"goodness = being good"},{w:"Soft + ness",h:"softness = being soft"}]}],
+    [{w:"Please",m:"Polite word when asking",u:"Please pass the salt."},{w:"Thank you",m:"Showing gratitude",u:"Thank you for helping me."},{w:"Sorry",m:"Showing you regret",u:"I am sorry I was late."},{w:"Excuse me",m:"Polite way to get attention",u:"Excuse me, may I come in?"}],
+    [{ph:"Actions speak louder than words",mean:"What you do matters more",use:"Don't just say you are kind — actions speak louder than words."},{ph:"Do unto others",mean:"Treat others how you want to be treated",use:"Be kind — do unto others as you wish for yourself."}],
+    [{icon:"🙏",name:"Morning Prayers",steps:["Wake up and fold hands","Thank God for a new day","Ask for strength and wisdom","Pray for family's health","Start the day with positivity"]},{icon:"♻️",name:"Eco-Friendly Habits",steps:["Turn off lights when leaving","Close taps when not using","Use both sides of paper","Put rubbish in dustbin","Say no to plastic bags"]}],
+    {q:"Which word means 'always tells the truth'?",opts:["Brave","Polite","Honest","Kind"],ans:2,exp:"Honest ✓ — Honest people always tell the truth! Honesty is the best policy!"}
+  ),
+  day("Festivals of India",
+    [{pre:"Di",bl:"wali",ans:["Diwali"],mean:"Festival of lights 🪔"},{pre:"Ho",bl:"li",ans:["Holi"],mean:"Festival of colors 🌈"},{pre:"Ei",bl:"d",ans:["Eid"],mean:"Muslim celebration 🌙"},{pre:"Chr",bl:"istmas",ans:["Christmas"],mean:"Christian festival ⛪"}],
+    [{parts:["fire","work"],res:"firework",mean:"Colorful lights in sky 🎆"},{parts:["sweet","meat"],res:"sweetmeat",mean:"Indian festival sweets"},{parts:["folk","dance"],res:"folkdance",mean:"Traditional dance form"},{parts:["greet","ing"],res:"greeting",mean:"Saying hello warmly"}],
+    [{rule:"Festival names",sound:"from different languages",ex:[{w:"Diwali",h:"di-WAH-lee"},{w:"Holi",h:"HOH-lee"},{w:"Christmas",h:"KRIS-mus"}]},{rule:"-al ending",sound:"relating to",ex:[{w:"Festival",h:"FES-ti-vul"},{w:"Cultural",h:"KUL-cher-ul"},{w:"National",h:"NA-shun-ul"}]}],
+    [{w:"Celebrate",m:"Mark a happy event",u:"We celebrate Diwali with lights."},{w:"Tradition",m:"Custom passed through generations",u:"Making rangoli is our tradition."},{w:"Gather",m:"Come together as a group",u:"Families gather on festivals."},{w:"Gift",m:"Present given to someone",u:"We give gifts on Eid."}],
+    [{ph:"In the spirit of",mean:"Feeling the atmosphere of",use:"In the spirit of Diwali we lit diyas."},{ph:"Once in a lifetime",mean:"A very special rare event",use:"This festival experience is once in a lifetime!"}],
+    [{icon:"🪔",name:"Diwali Preparation",steps:["Clean and decorate the house","Make rangoli at entrance","Light diyas in the evening","Give sweets to neighbors","Watch fireworks together"]},{icon:"🌈",name:"Holi Day",steps:["Wear old white clothes","Apply oil on skin first","Play with dry colors safely","Don't put colors near eyes","Bathe and change after playing"]}],
+    {q:"Which festival is called Festival of Lights?",opts:["Holi","Eid","Diwali","Christmas"],ans:2,exp:"Diwali 🪔 is the Festival of Lights! Deepa (lamp) + Avali (row) = row of lamps!"}
+  ),
+  day("Nature Around Us",
+    [{pre:"Flow",bl:"er",ans:["Flower"],mean:"Beautiful plant part 🌸"},{pre:"But",bl:"terfly",ans:["Butterfly"],mean:"Colorful winged insect 🦋"},{pre:"Moun",bl:"tain",ans:["Mountain"],mean:"Very high land 🏔️"},{pre:"Riv",bl:"er",ans:["River"],mean:"Water flowing on land 🏞️"}],
+    [{parts:["butter","fly"],res:"butterfly",mean:"Starts as caterpillar 🦋"},{parts:["rain","forest"],res:"rainforest",mean:"Dense jungle with heavy rain 🌿"},{parts:["water","fall"],res:"waterfall",mean:"Water falling from height 💧"},{parts:["sun","set"],res:"sunset",mean:"Sun going down in evening 🌅"}],
+    [{rule:"Nature words",sound:"peaceful and calm",ex:[{w:"River",h:"RIV-er"},{w:"Mountain",h:"MOWN-ten"},{w:"Forest",h:"FOR-est"}]},{rule:"-er ending",sound:"person or place",ex:[{w:"River",h:"flows"},{w:"Flower",h:"blooms"},{w:"Thunder",h:"sounds loud"}]}],
+    [{w:"Beautiful",m:"Very pleasing to see",u:"The sunset is beautiful."},{w:"Peaceful",m:"Calm and quiet",u:"The forest is peaceful."},{w:"Fresh",m:"Clean and pure",u:"Mountain air is fresh."},{w:"Lush",m:"Green and full of plants",u:"The valley is lush and green."}],
+    [{ph:"Take root",mean:"Become established",use:"The new habit slowly took root."},{ph:"Bark up the wrong tree",mean:"Look in the wrong place",use:"You are barking up the wrong tree — I didn't take it!"}],
+    [{icon:"🌿",name:"Nature Walk",steps:["Go to a park or garden","Look for different flowers","Notice types of leaves","Listen for bird sounds","Pick up any litter you see"]},{icon:"🌱",name:"Plant a Seed",steps:["Choose a seed (any type)","Fill a pot with good soil","Press seed 1cm deep","Water gently every day","Keep in sunlight and watch it grow"]}],
+    {q:"What do we call water falling from a height?",opts:["River","Lake","Waterfall","Pond"],ans:2,exp:"Waterfall 💧 — Water + Fall = water that falls! Niagara Falls is the most famous!"}
+  ),
+  day("My Community",
+    [{pre:"Doct",bl:"or",ans:["Doctor"],mean:"Helps sick people get better 👨‍⚕️"},{pre:"Poli",bl:"ceman",ans:["Policeman"],mean:"Keeps us safe 👮"},{pre:"Fire",bl:"fighter",ans:["Firefighter"],mean:"Puts out fires 🔥"},{pre:"Farm",bl:"er",ans:["Farmer"],mean:"Grows our food 🌾"}],
+    [{parts:["fire","station"],res:"firestation",mean:"Where fire engines are kept"},{parts:["police","man"],res:"policeman",mean:"Person who protects us"},{parts:["post","man"],res:"postman",mean:"Delivers letters and parcels"},{parts:["shop","keeper"],res:"shopkeeper",mean:"Person who runs a shop"}],
+    [{rule:"Job words",sound:"-er or -man ending",ex:[{w:"Teacher",h:"one who teaches"},{w:"Farmer",h:"one who farms"},{w:"Postman",h:"man who brings post"}]},{rule:"-er ending",sound:"person who does",ex:[{w:"Drive → Driver",h:"one who drives"},{w:"Bake → Baker",h:"one who bakes"},{w:"Work → Worker",h:"one who works"}]}],
+    [{w:"Helpful",m:"Ready to help others",u:"The doctor is very helpful."},{w:"Brave",m:"Faces danger without fear",u:"Firefighters are very brave."},{w:"Hardworking",m:"Works with great effort",u:"Farmers are very hardworking."},{w:"Important",m:"Matters a great deal",u:"Every job is important."}],
+    [{ph:"Pillar of the community",mean:"Important person in society",use:"The doctor is a pillar of the community."},{ph:"Jack of all trades",mean:"Person who can do many things",use:"He fixes everything — jack of all trades!"}],
+    [{icon:"🏥",name:"Visit the Doctor",steps:["Tell Mummy you feel unwell","Go to the clinic","Sit and wait your turn","Tell doctor how you feel","Take medicine as told"]}
+    ,{icon:"🌾",name:"Thank a Farmer",steps:["Think of food on your plate","Remember a farmer grew it","Never waste food","Learn names of crops","Appreciate their hard work"]}],
+    {q:"Who puts out fires?",opts:["Farmer","Doctor","Firefighter","Postman"],ans:2,exp:"Firefighter ✓ — They bravely fight fires to save lives and property! 🚒"}
+  ),
+  day("Time and Days",
+    [{pre:"Mon",bl:"day",ans:["Monday"],mean:"First day of school week"},{pre:"Fri",bl:"day",ans:["Friday"],mean:"Last school day of week"},{pre:"Sun",bl:"day",ans:["Sunday"],mean:"Day of rest 😴"},{pre:"To",bl:"morrow",ans:["Tomorrow"],mean:"The day after today"}],
+    [{parts:["yester","day"],res:"yesterday",mean:"Day before today"},{parts:["to","day"],res:"today",mean:"This current day"},{parts:["to","morrow"],res:"tomorrow",mean:"Day after today"},{parts:["mid","night"],res:"midnight",mean:"12 o'clock at night 🌙"}],
+    [{rule:"Days of week",sound:"named after planets",ex:[{w:"Monday",h:"Moon's day"},{w:"Sunday",h:"Sun's day"},{w:"Saturday",h:"Saturn's day"}]},{rule:"Time words",sound:"past present future",ex:[{w:"Yesterday",h:"past"},{w:"Today",h:"present"},{w:"Tomorrow",h:"future"}]}],
+    [{w:"Morning",m:"Early part of day",u:"School starts in morning."},{w:"Afternoon",m:"After 12 noon",u:"We rest in afternoon."},{w:"Evening",m:"Late part of day",u:"We play in evening."},{w:"Night",m:"Dark time for sleeping",u:"We sleep at night."}],
+    [{ph:"No time like the present",mean:"Do it now not later",use:"Start studying — no time like the present!"},{ph:"Around the clock",mean:"All day and night",use:"Nurses work around the clock."}],
+    [{icon:"⏰",name:"Morning Time Routine",steps:["Wake up at set time daily","Don't press snooze button","Complete morning tasks fast","Leave home on time","Arrive 5 minutes early"]},{icon:"📅",name:"Plan Your Week",steps:["Look at your timetable","Write what you must do","Mark exam dates","Plan study and play times","Tick tasks when done"]}],
+    {q:"Which day comes after Sunday?",opts:["Saturday","Friday","Monday","Tuesday"],ans:2,exp:"Monday ✓ comes after Sunday! Sun Mon Tue Wed Thu Fri Sat — learn this order! 📅"}
+  ),
+  day("Review — Week 3",
+    [{pre:"Teach",bl:"er",ans:["Teacher"],mean:"Week 2 review — jobs"},{pre:"Rain",bl:"bow",ans:["Rainbow"],mean:"Weather review 🌈"},{pre:"Butter",bl:"fly",ans:["Butterfly"],mean:"Nature review 🦋"},{pre:"Break",bl:"fast",ans:["Breakfast"],mean:"Food review 🍳"}],
+    [{parts:["some","thing"],res:"something",mean:"An unnamed thing"},{parts:["every","one"],res:"everyone",mean:"All people"},{parts:["any","where"],res:"anywhere",mean:"Any place at all"},{parts:["no","where"],res:"nowhere",mean:"Not any place"}],
+    [{rule:"Review — UN means",sound:"not or opposite",ex:[{w:"Unhappy",h:"not happy"},{w:"Unkind",h:"not kind"},{w:"Unwell",h:"not well"}]},{rule:"Review — -ING means",sound:"action happening now",ex:[{w:"Running",h:"action now"},{w:"Jumping",h:"action now"},{w:"Singing",h:"action now"}]}],
+    [{w:"Wonderful",m:"Full of wonder",u:"What a wonderful world!"},{w:"Amazing",m:"Extremely surprising",u:"The rainbow is amazing."},{w:"Brilliant",m:"Very bright or clever",u:"You are brilliant!"},{w:"Proud",m:"Feeling of achievement",u:"I am proud of you."}],
+    [{ph:"You learn something new every day",mean:"Life is full of lessons",use:"I didn't know that — you learn something new every day!"},{ph:"Practice makes perfect",mean:"Keep trying to improve",use:"Keep writing — practice makes perfect!"}],
+    [{icon:"📝",name:"Weekly Review",steps:["Get your notebook","Write 5 new words you learned","Write 2 idioms you know","Write one thing you improved","Show your teacher tomorrow"]},{icon:"🎯",name:"Set a Goal",steps:["Think of one thing to improve","Write it clearly","Make a plan to achieve it","Work on it every day","Reward yourself when done"]}],
+    {q:"What does UN mean?",opts:["Again","Before","Not","Very"],ans:2,exp:"UN = Not ✓ — Unhappy = not happy, Unkind = not kind, Unlock = not locked!"}
+  ),
+  day("Feelings",
+    [{pre:"Excit",bl:"ed",ans:["Excited"],mean:"Very happy and eager"},{pre:"Nerv",bl:"ous",ans:["Nervous"],mean:"Worried about something"},{pre:"Conf",bl:"ident",ans:["Confident"],mean:"Sure of yourself"},{pre:"Grat",bl:"eful",ans:["Grateful"],mean:"Thankful for something"}],
+    [{parts:["cheer","ful"],res:"cheerful",mean:"Always in good mood 😊"},{parts:["thank","ful"],res:"thankful",mean:"Feeling of gratitude"},{parts:["hope","ful"],res:"hopeful",mean:"Expecting good things"},{parts:["fear","ful"],res:"fearful",mean:"Feeling afraid"}],
+    [{rule:"Feeling words",sound:"-ed ending for state",ex:[{w:"Excited",h:"ex-SITE-ed"},{w:"Nervous",h:"NUR-vus"},{w:"Worried",h:"WUR-eed"}]},{rule:"-ful ending",sound:"full of feeling",ex:[{w:"Cheerful",h:"full of cheer"},{w:"Hopeful",h:"full of hope"},{w:"Grateful",h:"full of gratefulness"}]}],
+    [{w:"Smile",m:"Happy expression",u:"Smile and the world smiles back."},{w:"Cry",m:"Tears from eyes",u:"It is okay to cry sometimes."},{w:"Laugh",m:"Sound of happiness",u:"A good laugh is good medicine."},{w:"Worry",m:"Feel anxious",u:"Don't worry — be happy!"}],
+    [{ph:"On cloud nine",mean:"Extremely happy",use:"I got 100 marks — I am on cloud nine!"},{ph:"Down in the dumps",mean:"Feeling very sad",use:"She is down in the dumps after losing."}],
+    [{icon:"😊",name:"Express Yourself",steps:["Think about how you feel","Find the right word for it","Tell a trusted person","Draw your feelings if you can't say","Remember — all feelings are okay"]},{icon:"🤗",name:"Cheer Up a Friend",steps:["Notice if friend looks sad","Go and sit beside them","Ask if they want to talk","Say something kind","Give them a smile or hug"]}],
+    {q:"Which word means 'very happy and eager'?",opts:["Nervous","Grateful","Excited","Fearful"],ans:2,exp:"Excited ✓ — When something good is about to happen we feel excited! Like before a birthday! 🎂"}
+  ),
+  day("My Country India",
+    [{pre:"Ind",bl:"ia",ans:["India"],mean:"Our beautiful country 🇮🇳"},{pre:"Nat",bl:"ional",ans:["National"],mean:"Belonging to the nation"},{pre:"Cap",bl:"ital",ans:["Capital"],mean:"Main city of government"},{pre:"Parl",bl:"iament",ans:["Parliament"],mean:"Where laws are made"}],
+    [{parts:["home","land"],res:"homeland",mean:"Country you belong to"},{parts:["flag","post"],res:"flagpost",mean:"Pole that holds the flag"},{parts:["nation","al"],res:"national",mean:"Relating to the nation"},{parts:["patri","ot"],res:"patriot",mean:"Person who loves their country"}],
+    [{rule:"Country words",sound:"from Sanskrit/Latin",ex:[{w:"India",h:"IN-dee-uh"},{w:"National",h:"NA-shun-ul"},{w:"Parliament",h:"PAR-li-ment"}]},{rule:"Our national symbols",sound:"learn and remember",ex:[{w:"National bird",h:"Peacock 🦚"},{w:"National animal",h:"Tiger 🐯"},{w:"National flower",h:"Lotus 🪷"}]}],
+    [{w:"Proud",m:"Happy about something great",u:"I am proud to be Indian."},{w:"Unity",m:"Being together as one",u:"Unity is our strength."},{w:"Diverse",m:"Many different types",u:"India is diverse in culture."},{w:"Freedom",m:"Right to live as you wish",u:"We got freedom in 1947."}],
+    [{ph:"My country right or wrong",mean:"Loyalty to your nation",use:"True patriots support their country."},{ph:"When in Rome do as Romans do",mean:"Follow local customs",use:"In India we respect all festivals — when in Rome!"}],
+    [{icon:"🇮🇳",name:"Independence Day",steps:["Wear white or tricolor clothes","Go to school flag hoisting","Sing national anthem proudly","Remember freedom fighters","Promise to serve India"]}
+    ,{icon:"🏛️",name:"Learn About India",steps:["Find India on a world map","Name 5 states of India","Learn about our capital Delhi","Name our national symbols","Be proud of your heritage"]}],
+    {q:"What is India's national bird?",opts:["Sparrow","Eagle","Peacock","Parrot"],ans:2,exp:"Peacock 🦚 is India's National Bird! It has beautiful colorful feathers and dances in rain!"}
+  ),
+  day("LKG Final Day — Celebration!",
+    [{pre:"Learn",bl:"ing",ans:["Learning"],mean:"You learned so much! 📚"},{pre:"Achiev",bl:"ement",ans:["Achievement"],mean:"Something you accomplished 🏆"},{pre:"Excell",bl:"ent",ans:["Excellent"],mean:"Very very good ⭐"},{pre:"Celebr",bl:"ation",ans:["Celebration"],mean:"Marking a happy event 🎉"}],
+    [{parts:["star","light"],res:"starlight",mean:"Light from stars ⭐"},{parts:["sun","shine"],res:"sunshine",mean:"You are the sunshine ☀️"},{parts:["over","come"],res:"overcome",mean:"You overcame every challenge 💪"},{parts:["break","through"],res:"breakthrough",mean:"You had a real breakthrough! 💡"}],
+    [{rule:"You learned!",sound:"A to Z — all letters",ex:[{w:"Spelling patterns",h:"Cap___, Move___, Kind___"},{w:"Word building",h:"sun+shine, but+ter+fly"},{w:"Pronunciations",h:"how words really sound"}]},{rule:"You know idioms!",sound:"amazing achievement",ex:[{w:"Piece of cake",h:"something easy"},{w:"On cloud nine",h:"very happy"},{w:"Practice makes perfect",h:"keep trying!"}]}],
+    [{w:"Champion",m:"Winner of the highest level",u:"You are a learning champion! 🏆"},{w:"Brilliant",m:"Very bright and clever",u:"You are brilliant! Keep going."},{w:"Progress",m:"Moving forward and improving",u:"Your progress is amazing."},{w:"Future",m:"Time that is yet to come",u:"Your future is bright! ☀️"}],
+    [{ph:"The sky is the limit",mean:"You can achieve anything",use:"Keep learning — the sky is the limit!"},{ph:"Go the extra mile",mean:"Put in extra effort",use:"You went the extra mile for 30 days!"}],
+    [{icon:"🏆",name:"Celebrate Your Achievement",steps:["Tell your family you finished!","Show them what you learned","Write your favorite new word","Draw your favorite idiom","You deserve a treat! 🍦"]},{icon:"🌟",name:"Plan What's Next",steps:["You completed LKG learning","Now try UKG level!","Keep reading every day","Use new words you learned","Teach a friend what you know"]}],
+    {q:"You finished 30 days! What does 'The sky is the limit' mean?",opts:["Look at the sky","You can achieve anything","Clouds block the sun","Fly like a bird"],ans:1,exp:"The sky is the limit ✓ = You can achieve ANYTHING! 🚀 Congratulations on 30 days! 🏆🎉"}
+  )
+];
+
+// ---- UKG to Class 5 — Generate with increasing difficulty ----
+function generateDays(classIdx) {
+  // classIdx: 0=LKG, 1=UKG, 2=C1, 3=C2, 4=C3, 5=C4, 6=C5
+  if(classIdx === 0) return lkg;
+  
+  const templates = [
+    // Each template scales with classIdx
+    {
+      topics:["Spelling -TION words","Word Building basics","-MENT words","Opposites with UN-","-NESS words","-FUL words","-ABLE words","Compound words","Prefixes RE- PRE-","Suffixes -ARY -ERY","Action verbs -ING","Adjectives","Adverbs -LY","Compound sentences","Idioms in daily life","Science vocabulary","Geography words","History words","Technology words","Art and Music words","Sports vocabulary","Health and body","Food and nutrition","Nature and environment","Community helpers","Time and calendar","Feelings and emotions","Character values","India and world","Final Review — 30 days!"]
+    }
+  ];
+  
+  const spellingByClass = [
+    // UKG
+    [["Cap","tion",["Caption","Captain"],"A title or heading"],["Ac","tion",["Action","Active"],"Doing something"],["Na","tion",["Nation","National"],"A country"],["Sta","tion",["Station","Stationary"],"A fixed place"]],
+    // Class 1
+    [["Move","ment",["Movement"],"Act of moving"],["Govern","ment",["Government"],"Rules a country"],["Apart","ment",["Apartment"],"A flat/home"],["Amaze","ment",["Amazement"],"Feeling of wonder"]],
+    // Class 2
+    [["Kind","ness",["Kindness"],"Being kind"],["Dark","ness",["Darkness"],"Absence of light"],["Happi","ness",["Happiness"],"Feeling of joy"],["Weak","ness",["Weakness"],"Being weak"]],
+    // Class 3
+    [["Comfort","able",["Comfortable"],"At ease"],["Remark","able",["Remarkable"],"Worth noticing"],["Wonder","ful",["Wonderful"],"Full of wonder"],["Power","ful",["Powerful"],"Having great power"]],
+    // Class 4
+    [["Edu","cation",["Education"],"Process of learning"],["Exam","ination",["Examination"],"A formal test"],["Certifi","cate",["Certificate"],"Document of achievement"],["Commu","nication",["Communication"],"Exchange of information"]],
+    // Class 5
+    [["Charac","teristic",["Characteristic"],"Typical quality"],["Circum","stance",["Circumstance"],"Situation or condition"],["Respon","sibility",["Responsibility"],"Duty or obligation"],["Oppor","tunity",["Opportunity"],"A favorable chance"]]
+  ];
+  
+  const wbByClass = [
+    [["sun","shine","sunshine","Light from sun ☀️"],["rain","bow","rainbow","Colors after rain 🌈"],["foot","ball","football","Sport with feet ⚽"],["butter","fly","butterfly","Beautiful insect 🦋"]],
+    [["ab","use","abuse","Use wrongly"],["men","u","menu","List of food 🍽️"],["car","pet","carpet","Floor covering"],["man","go","mango","Sweet fruit 🥭"]],
+    [["break","fast","breakfast","Morning meal 🍳"],["note","book","notebook","For writing 📓"],["home","work","homework","Study at home"],["play","ground","playground","Where we play"]],
+    [["micro","scope","microscope","Sees tiny things 🔬"],["tele","scope","telescope","Sees far things 🔭"],["photo","graph","photograph","A picture 📷"],["bio","logy","biology","Study of life"]],
+    [["over","come","overcome","Defeat a problem 💪"],["under","stand","understand","Know clearly"],["break","through","breakthrough","Important discovery 💡"],["out","standing","outstanding","Excellent! 🌟"]],
+    [["charac","ter","character","Who a person is"],["circum","ference","circumference","Distance around circle"],["inter","national","international","Between nations"],["extra","ordinary","extraordinary","Beyond ordinary"]]
+  ];
+  
+  const idiomsByClass = [
+    [["Break a leg!","Good luck!","Break a leg in your exam!"],["Piece of cake","Very easy","This quiz is a piece of cake!"]],
+    [["Hit the books","Study hard","Exams near — hit the books!"],["Burn the midnight oil","Work late into night","She burned midnight oil before exams."]],
+    [["Kill two birds with one stone","Do two things at once","I exercised and listened to lesson — killed two birds with one stone!"],["Bite the bullet","Do something hard bravely","Bite the bullet and finish the project."]],
+    [["Bite off more than you can chew","Take on too much","Don't bite off more than you can chew with 5 projects."],["Beat around the bush","Avoid the main point","Stop beating around the bush — what happened?"]],
+    [["Burning the candle at both ends","Working too hard without rest","He is burning the candle at both ends this term."],["Bite the dust","Fail or be defeated","The other team bit the dust in the finals."]],
+    [["Once in a blue moon","Something very rare","We visit that restaurant once in a blue moon."],["The ball is in your court","Your turn to decide","I have done my part — the ball is in your court."]]
+  ];
+  
+  const actByClass = [
+    [{icon:"🥣",name:"Make Cereal",steps:["Pour cereal in bowl","Add cold milk","Add some fruit","Mix gently","Eat while reading"]},{icon:"📚",name:"Read a Book",steps:["Choose a book","Find quiet place","Read for 15 minutes","Note new words","Tell someone the story"]}],
+    [{icon:"🍳",name:"Help Make Breakfast",steps:["Wash hands first","Get bread and butter","Spread butter on bread","Make a sandwich","Pour a glass of milk"]},{icon:"🧺",name:"Sort Laundry",steps:["Separate light and dark clothes","Check pockets for items","Put each type in basket","Help fold dry clothes","Put away in wardrobe"]}],
+    [{icon:"🌿",name:"Composting",steps:["Collect vegetable peels","Add dry leaves too","Mix in a compost bin","Add water if too dry","Use as plant food in weeks"]},{icon:"🏪",name:"Grocery Shopping",steps:["Write a shopping list first","Go to the supermarket","Find each item on list","Check expiry dates","Keep within the budget"]}],
+    [{icon:"🍕",name:"Make a Simple Snack",steps:["Toast two bread slices","Spread tomato sauce","Add cheese on top","Put vegetables you like","Ask adult to grill it"]},{icon:"💰",name:"Manage Pocket Money",steps:["Note how much you have","Decide what you need vs want","Save at least 20 percent","Spend wisely on needs","Track what you spend"]}],
+    [{icon:"🗓️",name:"Plan Your Day",steps:["Write tomorrow's tasks tonight","Put most important first","Set time for each task","Include breaks and meals","Review at end of day"]},{icon:"📊",name:"Research a Topic",steps:["Choose a topic you like","Search in library or online","Take notes in your own words","Organize by subtopics","Present to your family"]}],
+    [{icon:"🎯",name:"Set Monthly Goal",steps:["Choose one important goal","Write it with deadline","Break into weekly targets","Review progress weekly","Celebrate when achieved"]},{icon:"🤝",name:"Lead a Group",steps:["Understand the task clearly","Divide work fairly among members","Set a deadline for each part","Check everyone is on track","Bring the work together"]}]
+  ];
+  
+  const ci = classIdx - 1; // 0 to 5
+  const sp = spellingByClass[ci] || spellingByClass[5];
+  const wb = wbByClass[ci] || wbByClass[5];
+  const id = idiomsByClass[ci] || idiomsByClass[5];
+  const ac = actByClass[ci] || actByClass[5];
+  const topicList = templates[0].topics;
+  
+  const vocabSets = [
+    [{w:"Brave",m:"Courageous",u:"The brave child saved the cat."},{w:"Clever",m:"Smart and quick",u:"The clever student solved it fast."},{w:"Patient",m:"Calm while waiting",u:"Be patient — good things take time."},{w:"Grateful",m:"Thankful",u:"I am grateful for my teachers."}],
+    [{w:"Achieve",m:"Successfully reach a goal",u:"Work hard to achieve your dreams."},{w:"Persist",m:"Keep trying despite difficulties",u:"Persist even when it is hard."},{w:"Collaborate",m:"Work together with others",u:"Collaborate with your classmates."},{w:"Innovate",m:"Create new ideas",u:"Innovate solutions to problems."}]
+  ];
+  
+  const pronSets = [
+    [{rule:"-TION sounds like",sound:"'shun'",ex:[{w:"nation",h:"NAY-shun"},{w:"station",h:"STAY-shun"},{w:"action",h:"AK-shun"}]},{rule:"Silent letters",sound:"not spoken",ex:[{w:"knee",h:"NEE (k silent)"},{w:"write",h:"RITE (w silent)"},{w:"thumb",h:"THUM (b silent)"}]}],
+    [{rule:"-MENT sounds like",sound:"'ment'",ex:[{w:"movement",h:"MOOV-ment"},{w:"government",h:"GUV-ment"},{w:"moment",h:"MOH-ment"}]},{rule:"Stress patterns",sound:"which syllable is louder",ex:[{w:"photograph",h:"PHO-to-graph"},{w:"photography",h:"pho-TOG-ra-phy"},{w:"photographer",h:"pho-TOG-ra-fer"}]}]
+  ];
+  
+  const quizzes = [
+    {q:"What does -TION sound like?",opts:["ton","shun","tion","sun"],ans:1,exp:"-TION sounds like 'shun' ✓ — nation=NAY-shun, action=AK-shun!"},
+    {q:"RE- means?",opts:["Not","Before","Again","Very"],ans:2,exp:"RE = Again ✓ — Rewrite=write again, Recycle=use again!"},
+    {q:"Which is a compound word?",opts:["Running","Sunshine","Happy","Quickly"],ans:1,exp:"Sunshine = Sun + Shine ✓ — compound words join two words!"},
+    {q:"PRE- means?",opts:["After","Before","Again","Not"],ans:1,exp:"PRE = Before ✓ — Preview=see before, Prepare=get ready before!"},
+    {q:"What does an idiom mean?",opts:["Exact words","Hidden meaning","Science word","Grammar rule"],ans:1,exp:"Idioms have hidden meanings ✓ — 'Break a leg' means good luck, not really break!"},
+    {q:"-FUL means?",opts:["Without","Full of","Again","Not"],ans:1,exp:"-FUL = Full of ✓ — Wonderful=full of wonder, Careful=full of care!"}
+  ];
+  
+  const days = [];
+  for(let d = 0; d < 30; d++){
+    const spIdx = d % sp.length;
+    const wbIdx = d % wb.length;
+    const idIdx = d % id.length;
+    const acIdx = d % ac.length;
+    const vcIdx = d % vocabSets.length;
+    const prIdx = d % pronSets.length;
+    const qzIdx = d % quizzes.length;
+    
+    days.push({
+      topic: topicList[d] || `Day ${d+1} Learning`,
+      spelling: [
+        {pre:sp[0][0],bl:sp[0][1],ans:sp[0][2],mean:sp[0][3]},
+        {pre:sp[1][0],bl:sp[1][1],ans:sp[1][2],mean:sp[1][3]},
+        {pre:sp[2 % sp.length][0],bl:sp[2 % sp.length][1],ans:sp[2 % sp.length][2],mean:sp[2 % sp.length][3]},
+        {pre:sp[3 % sp.length][0],bl:sp[3 % sp.length][1],ans:sp[3 % sp.length][2],mean:sp[3 % sp.length][3]}
+      ],
+      wordBuild: [
+        {parts:[wb[wbIdx][0],wb[wbIdx][1]],res:wb[wbIdx][2],mean:wb[wbIdx][3]},
+        {parts:[wb[(wbIdx+1)%wb.length][0],wb[(wbIdx+1)%wb.length][1]],res:wb[(wbIdx+1)%wb.length][2],mean:wb[(wbIdx+1)%wb.length][3]},
+        {parts:[wb[(wbIdx+2)%wb.length][0],wb[(wbIdx+2)%wb.length][1]],res:wb[(wbIdx+2)%wb.length][2],mean:wb[(wbIdx+2)%wb.length][3]},
+        {parts:[wb[(wbIdx+3)%wb.length][0],wb[(wbIdx+3)%wb.length][1]],res:wb[(wbIdx+3)%wb.length][2],mean:wb[(wbIdx+3)%wb.length][3]}
+      ],
+      pronunciation: pronSets[prIdx],
+      vocab: vocabSets[vcIdx],
+      idioms: [id[idIdx],id[(idIdx+1)%id.length]],
+      activity: [ac[acIdx],ac[(acIdx+1)%ac.length]],
+      quiz: quizzes[qzIdx]
+    });
+  }
+  return days;
+}
+
+// Build all class data
+const allClassData = [lkg, generateDays(1), generateDays(2), generateDays(3), generateDays(4), generateDays(5), generateDays(6)];
+
+// State
+let currentClass = 0;
+let currentDay = 0;
+
+function setClass(idx, btn){
+  currentClass = idx;
+  currentDay = 0;
+  document.querySelectorAll('.ctab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function changeDay(dir){
+  const nd = currentDay + dir;
+  if(nd < 0 || nd >= 30) return;
+  currentDay = nd;
+  render();
+  window.scrollTo({top:200,behavior:'smooth'});
+}
+
+function render(){
+  const data = allClassData[currentClass];
+  const day = data[currentDay];
+  const cn = classNames[currentClass];
+  const dn = currentDay + 1;
+  const prog = (dn / 30 * 100).toFixed(1);
+  
+  document.getElementById('navBadge').textContent = `Day ${dn} · ${cn}`;
+  document.getElementById('dayNum').textContent = `Day ${dn}`;
+  document.getElementById('dayTopic').textContent = day.topic;
+  document.getElementById('progFill').style.width = prog + '%';
+  document.getElementById('prevBtn').disabled = currentDay === 0;
+  document.getElementById('nextBtn').disabled = currentDay === 29;
+  
+  document.getElementById('content').innerHTML = `
+    <!-- SPELLING -->
+    <div class="card">
+      <div class="card-header"><span class="card-icon">✏️</span><div><div class="card-title">Spelling Pattern Builder</div><div class="card-sub">Complete the word — find the right ending!</div></div></div>
+      <div class="spell-grid">
+        ${day.spelling.map(s=>`
+          <div class="spell-item">
+            <div class="spell-word">${s.pre}<span class="spell-blank">${s.bl}</span></div>
+            <div class="spell-ans">${s.ans.map(a=>`<span class="sans">→ ${a}</span>`).join('')}</div>
+            <div class="spell-mean">💡 ${s.mean}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+    
+    <!-- WORD BUILD -->
+    <div class="card">
+      <div class="card-header"><span class="card-icon">🔤</span><div><div class="card-title">Word Building</div><div class="card-sub">See how words are made from smaller parts!</div></div></div>
+      <div class="wb-grid">
+        ${day.wordBuild.map(w=>`
+          <div class="wb-item">
+            <div class="wb-eq">
+              ${w.parts.map((p,i)=>`<span class="wb-part">${p}</span>${i<w.parts.length-1?'<span class="wb-plus">+</span>':''}`).join('')}
+              <span class="wb-plus">=</span>
+              <span class="wb-result">${w.res}</span>
+            </div>
+            <div class="wb-mean">💡 ${w.mean}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+    
+    <!-- PRONUNCIATION -->
+    <div class="card">
+      <div class="card-header"><span class="card-icon">🗣️</span><div><div class="card-title">Pronunciation Guide</div><div class="card-sub">Learn how to SAY words correctly</div></div></div>
+      <div class="pron-grid">
+        ${day.pronunciation.map(p=>`
+          <div class="pron-item">
+            <div class="pron-rule">${p.rule}</div>
+            <div class="pron-sound">${p.sound}</div>
+            ${p.ex.map(e=>`<div class="pron-ex"><span class="pron-w">${e.w}</span><span class="pron-h">${e.h}</span></div>`).join('')}
+          </div>
+        `).join('')}
+      </div>
+    </div>
+    
+    <!-- VOCABULARY -->
+    <div class="card">
+      <div class="card-header"><span class="card-icon">📚</span><div><div class="card-title">New Words Today</div><div class="card-sub">Learn and use these words!</div></div></div>
+      <div class="voc-grid">
+        ${day.vocab.map(v=>`
+          <div class="voc-item">
+            <div class="voc-word">${v.w}</div>
+            <div class="voc-mean">${v.m}</div>
+            <div class="voc-use">"${v.u}"</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+    
+    <!-- IDIOMS -->
+    <div class="card">
+      <div class="card-header"><span class="card-icon">💬</span><div><div class="card-title">English Idioms</div><div class="card-sub">Phrases used in daily life — hidden meanings!</div></div></div>
+      <div class="idiom-grid">
+        ${day.idioms.map(id=>`
+          <div class="idiom-item">
+            <div class="idiom-phrase">"${id[0]}"</div>
+            <div class="idiom-mean">Meaning: ${id[1]}</div>
+            <div class="idiom-use">${id[2]}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+    
+    <!-- DAILY ACTIVITY -->
+    <div class="card">
+      <div class="card-header"><span class="card-icon">🏃</span><div><div class="card-title">Daily Activities in English</div><div class="card-sub">Learn to describe what you do every day!</div></div></div>
+      <div class="act-grid">
+        ${day.activity.map(a=>`
+          <div class="act-item">
+            <div class="act-icon">${a.icon}</div>
+            <div class="act-name">${a.name}</div>
+            <ul class="act-steps">
+              ${a.steps.map(s=>`<li>${s}</li>`).join('')}
+            </ul>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+    
+    <!-- QUIZ -->
+    <div class="card">
+      <div class="card-header"><span class="card-icon">🧠</span><div><div class="card-title">Daily Quiz</div><div class="card-sub">Test what you learned today!</div></div></div>
+      <div class="quiz-q">${day.quiz.q}</div>
+      <div class="quiz-opts">
+        ${day.quiz.opts.map((o,i)=>`<button class="qopt" onclick="checkAns(${i},${day.quiz.ans},'${day.quiz.exp.replace(/'/g,"\\'")}',this)">${o}</button>`).join('')}
+      </div>
+      <div class="quiz-res" id="qres"></div>
+    </div>
+    
+    <!-- COMPLETE -->
+    <div class="complete">
+      <div class="comp-emoji">${currentDay===29?'🏆':'⭐'}</div>
+      <h3>${currentDay===29?`${cn} — All 30 Days Done!`:`Day ${dn} Complete!`}</h3>
+      <p>${currentDay===29?`Congratulations! You finished all 30 days of ${cn} English learning! You are a Champion! 🎉`:`Great work today! Come back tomorrow for Day ${dn+1}.`}</p>
+      ${currentDay<29?`<button class="next-btn" onclick="changeDay(1)">Next Day →</button>`:currentClass<6?`<button class="next-btn" onclick="document.querySelectorAll('.ctab')[${currentClass+1}].click()">Try ${classNames[currentClass+1]} →</button>`:`<div style="font-size:1.8rem;margin-top:8px">🎊 🏆 🌟 🎉</div>`}
+    </div>
+  `;
+}
+
+function checkAns(sel,ans,exp,btn){
+  document.querySelectorAll('.qopt').forEach(o=>o.disabled=true);
+  const res = document.getElementById('qres');
+  if(sel===ans){btn.classList.add('correct');res.className='quiz-res show c';res.textContent='✓ Correct! '+exp;}
+  else{btn.classList.add('wrong');document.querySelectorAll('.qopt')[ans].classList.add('correct');res.className='quiz-res show w';res.textContent='✗ Not quite! '+exp;}
+}
+
+render();
+</script>
+</body>
+</html>
